@@ -13,9 +13,14 @@ use Illuminate\Support\Facades\Session;
 class MessagesController extends Controller
 {
 
+    /**
+     * Very simple API authentication. You should implement something
+     * a lot better than this...
+     */
     public function __construct()
     {
-        $user = User::find(1);
+        $api_key = Input::get('api_key');
+        $user = User::where('api_key', $api_key)->firstOrFail();
         Auth::login($user);
     }
 
