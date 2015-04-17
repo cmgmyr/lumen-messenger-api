@@ -12,5 +12,5 @@ Stay tuned for more info...
 		$app->configure('messenger');
 		$app->register('Cmgmyr\Messenger\MessengerServiceProvider');
 		
-	and uncomment: `$app->withFacades();` and `$app->withEloquent();`
+	and uncomment: `$app->withFacades();`, `$app->withEloquent();` and `'Illuminate\Session\Middleware\StartSession',` (within Middleware)
 4. Route prefixes aren't available in Lumen, so the full route needs to be provided in `app/Http/routes.php`
