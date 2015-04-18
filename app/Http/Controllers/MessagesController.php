@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Services\Transformer\ThreadTransformer;
 use App\User;
 use Carbon\Carbon;
 use Cmgmyr\Messenger\Models\Thread;
@@ -10,49 +11,69 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 
-class MessagesController extends Controller
+class MessagesController extends ApiController
 {
+
+    /**
+     * @var ThreadTransformer
+     */
+    protected $transformer;
+
+    /**
+     * @var User
+     */
+    protected $user;
 
     /**
      * Very simple API authentication. You should implement something
      * a lot better than this...
+     *
+     * @param ThreadTransformer $transformer
      */
-    public function __construct()
+    public function __construct(ThreadTransformer $transformer)
     {
         $api_key = Input::get('api_key');
-        $user = User::where('api_key', $api_key)->firstOrFail();
-        Auth::login($user);
+        $this->user = User::where('api_key', $api_key)->firstOrFail();
+        Auth::login($this->user);
+
+        $this->transformer = $transformer;
     }
 
     /**
-     * Show all of the message threads to the user
+     * Show all of the message threads associated with the user
+     *
+     * Example URL: /api/messages?api_key=30ce6864e2589b01bc002b03aa6a7923&per_page=10&page=2
      *
      * @return mixed
      */
     public function index()
     {
-        $currentUserId = Auth::user()->id;
+        $userId = $this->user->id;
+        $perPage = (int)Input::get('per_page', 25);
 
-        dd(Auth::user()->newMessagesCount());
+        // get all of the paginated threads
+        $threads = Thread::forUser($userId)->latest('updated_at')->paginate($perPage);
+        $threads->setPath(route('messages'));
+        $threads->addQuery('api_key', $this->user->api_key);
+        $threads->addQuery('per_page', $perPage);
 
-        // All threads, ignore deleted/archived participants
-        $threads = Thread::getAllLatest()->get();
-        $threads = Thread::forUser($currentUserId)->latest('updated_at')->get();
-
-        if ($threads->count() == 0) {
-            return [
-                'status' => 'Not Found',
-                'data' => null
-            ];
+        if ($threads->total() == 0) {
+            return $this->respondNotFound('No results returned. Please check back later.');
         }
 
-        return [
-            'status' => 'Found!',
-            'data' => [
-                'message 1',
-                'message 2'
-            ]
+        // see if the threads have been read by the user
+        $threads->each(function($thread) use ($userId) {
+            $thread->is_unread = $thread->isUnread($userId);
+        });
+
+        $data = $this->transformer->transformCollection($threads->toArray()['data']);
+
+        $response = [
+            'pagination' => $this->buildPagination($threads),
+            'data'       => $data
         ];
+
+        return $this->respondWithSuccess($response);
     }
 
     /**
