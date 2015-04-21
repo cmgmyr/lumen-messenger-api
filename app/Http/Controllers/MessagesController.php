@@ -15,11 +15,6 @@ class MessagesController extends ApiController
 {
 
     /**
-     * @var ThreadTransformer
-     */
-    protected $transformer;
-
-    /**
      * @var User
      */
     protected $user;
@@ -27,16 +22,12 @@ class MessagesController extends ApiController
     /**
      * Very simple API authentication. You should implement something
      * a lot better than this...
-     *
-     * @param ThreadTransformer $transformer
      */
-    public function __construct(ThreadTransformer $transformer)
+    public function __construct()
     {
         $api_key = Input::get('api_key');
         $this->user = User::where('api_key', $api_key)->firstOrFail();
         Auth::login($this->user);
-
-        $this->transformer = $transformer;
     }
 
     /**
@@ -44,9 +35,10 @@ class MessagesController extends ApiController
      *
      * Example URL: /api/messages?api_key=30ce6864e2589b01bc002b03aa6a7923&per_page=10&page=2
      *
+     * @param ThreadTransformer $threadTransformer
      * @return mixed
      */
-    public function index()
+    public function index(ThreadTransformer $threadTransformer)
     {
         $userId = $this->user->id;
         $perPage = (int)Input::get('per_page', 25);
@@ -66,7 +58,7 @@ class MessagesController extends ApiController
             $thread->is_unread = $thread->isUnread($userId);
         });
 
-        $data = $this->transformer->transformCollection($threads->toArray()['data']);
+        $data = $threadTransformer->transformCollection($threads->toArray()['data']);
 
         $response = [
             'pagination' => $this->buildPagination($threads),
