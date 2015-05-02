@@ -16,7 +16,8 @@ class MessageTransformer extends Transformer
             'subject' => $item['subject'],
             'created_at' => $item['created_at'],
             'updated_at' => $item['updated_at'],
-            'messages' => $this->transformMessageCollection($item['messages'])
+            'messages' => $this->transformMessageCollection($item['messages']),
+            'non_participants' => $this->transformParticipantsCollection($item['non_participants'])
         ];
     }
 
@@ -46,6 +47,31 @@ class MessageTransformer extends Transformer
             'body' => $item['body'],
             'created_at' => $item['created_at'],
             'updated_at' => $item['updated_at']
+        ];
+    }
+
+    /**
+     * Transforms a participants collection
+     *
+     * @param $collection
+     * @return array
+     */
+    public function transformParticipantsCollection($collection)
+    {
+        return array_map(array($this, 'transformParticipant'), $collection);
+    }
+
+    /**
+     * Transforms a given participants
+     *
+     * @param array $item
+     * @return array
+     */
+    public function transformParticipant(array $item)
+    {
+        return [
+            'id' => (int)$item['id'],
+            'user_name' => $item['first_name'] . ' ' . $item['last_name'],
         ];
     }
 }

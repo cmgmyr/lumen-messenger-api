@@ -80,21 +80,27 @@ class MessagesController extends ApiController
      */
     public function show(MessageTransformer $messageTransformer, $id)
     {
+        $userId = $this->user->id;
+
         try {
             $thread = Thread::findOrFail($id);
         } catch (ModelNotFoundException $e) {
             return $this->respondNotFound('Sorry, the message thread was not found.');
         }
 
-        $thread->markAsRead($this->user->id);
-        $messages = $thread->messages()->with('user')->get();
-
+        $thread->markAsRead($userId);
         $messageData = $thread->toArray();
+
+        // Get messages
+        $messages = $thread->messages()->with('user')->get();
         $messageData['messages'] = $messages->toArray();
 
-        // @todo: add participants:
-        // $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
-        // @todo: add non-participants
+        // Get participants
+        // @todo: add participants
+
+        // Get non-participants
+        $nonParticipants = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
+        $messageData['non_participants'] = $nonParticipants->toArray();
 
         $data = $messageTransformer->transform($messageData);
 
