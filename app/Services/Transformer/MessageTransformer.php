@@ -17,6 +17,7 @@ class MessageTransformer extends Transformer
             'created_at' => $item['created_at'],
             'updated_at' => $item['updated_at'],
             'messages' => $this->transformMessageCollection($item['messages']),
+            'participants' => $this->transformParticipantsCollection($item['participants']),
             'non_participants' => $this->transformParticipantsCollection($item['non_participants'])
         ];
     }

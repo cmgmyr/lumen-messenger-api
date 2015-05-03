@@ -96,10 +96,11 @@ class MessagesController extends ApiController
         $messageData['messages'] = $messages->toArray();
 
         // Get participants
-        // @todo: add participants
+        $participants = User::whereIn('id', $thread->participantsUserIds())->get();
+        $messageData['participants'] = $participants->toArray();
 
         // Get non-participants
-        $nonParticipants = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
+        $nonParticipants = User::whereNotIn('id', $thread->participantsUserIds())->get();
         $messageData['non_participants'] = $nonParticipants->toArray();
 
         $data = $messageTransformer->transform($messageData);
