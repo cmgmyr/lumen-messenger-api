@@ -113,18 +113,6 @@ class MessagesController extends ApiController
     }
 
     /**
-     * Creates a new message thread
-     *
-     * @return mixed
-     */
-    public function create()
-    {
-        $users = User::where('id', '!=', Auth::id())->get();
-
-        return view('messenger.create', compact('users'));
-    }
-
-    /**
      * Stores a new message thread
      *
      * @return mixed
