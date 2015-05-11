@@ -80,7 +80,7 @@ class ApiController extends Controller
      */
     public function respondNotFound($message = 'Not Found')
     {
-        return $this->setStatusCode(IR::HTTP_NOT_FOUND)->respondWithError(array('message' => $message));
+        return $this->setStatusCode(Response::HTTP_NOT_FOUND)->respondWithError(array('message' => $message));
     }
 
     /**
@@ -89,7 +89,7 @@ class ApiController extends Controller
      */
     public function respondWithNotSaved($message = 'Data Not Saved')
     {
-        return $this->setStatusCode(IR::HTTP_INTERNAL_SERVER_ERROR)->respondWithError(array('message' => $message));
+        return $this->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR)->respondWithError(array('message' => $message));
     }
 
     /**
@@ -98,7 +98,7 @@ class ApiController extends Controller
      */
     public function respondWithCreated($data)
     {
-        return $this->setStatusCode(IR::HTTP_CREATED)->respondWithSuccess($data);
+        return $this->setStatusCode(Response::HTTP_CREATED)->respondWithSuccess($data);
     }
 
     /**
