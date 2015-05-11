@@ -34,7 +34,7 @@ class MessagesController extends ApiController
     /**
      * Show all of the message threads associated with the user
      *
-     * Example URL: /api/v1/messages?api_key=30ce6864e2589b01bc002b03aa6a7923&per_page=10&page=2
+     * Example URL: GET /api/v1/messages?api_key=30ce6864e2589b01bc002b03aa6a7923&per_page=10&page=2
      *
      * @param ThreadTransformer $threadTransformer
      * @return mixed
@@ -72,7 +72,7 @@ class MessagesController extends ApiController
     /**
      * Shows a message thread
      *
-     * Example URL: /api/v1/messages/1?api_key=30ce6864e2589b01bc002b03aa6a7923
+     * Example URL: GET /api/v1/messages/1?api_key=30ce6864e2589b01bc002b03aa6a7923
      *
      * @param MessageTransformer $messageTransformer
      * @param $id
@@ -115,10 +115,14 @@ class MessagesController extends ApiController
     /**
      * Stores a new message thread
      *
+     * Example URL: POST /api/v1/messages?api_key=30ce6864e2589b01bc002b03aa6a7923
+     *
      * @return mixed
      */
     public function store()
     {
+        // @todo: run validation
+
         $input = Input::all();
 
         $thread = Thread::create(
@@ -150,7 +154,9 @@ class MessagesController extends ApiController
             $thread->addParticipants($input['recipients']);
         }
 
-        return redirect('messages');
+        return $this->respondWithCreated([
+            'id' => $thread->id
+        ]);
     }
 
     /**
