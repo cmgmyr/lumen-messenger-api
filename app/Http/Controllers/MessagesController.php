@@ -162,6 +162,8 @@ class MessagesController extends ApiController
     /**
      * Adds a new message to a current thread
      *
+     * Example URL: PUT /api/v1/messages/1?api_key=30ce6864e2589b01bc002b03aa6a7923
+     *
      * @param $id
      * @return mixed
      */
@@ -170,10 +172,10 @@ class MessagesController extends ApiController
         try {
             $thread = Thread::findOrFail($id);
         } catch (ModelNotFoundException $e) {
-            Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
-
-            return redirect('messages');
+            return $this->respondNotFound('Sorry, the message thread was not found.');
         }
+
+        // @todo: run validation
 
         $thread->activateAllParticipants();
 
@@ -201,6 +203,8 @@ class MessagesController extends ApiController
             $thread->addParticipants(Input::get('recipients'));
         }
 
-        return redirect('messages/' . $id);
+        return $this->respondWithSaved([
+            'id' => $thread->id
+        ]);
     }
 }
