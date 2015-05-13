@@ -120,6 +120,8 @@ class MessagesController extends ApiController
      */
     public function store()
     {
+        $userId = $this->user->id;
+
         // @todo: run validation
 
         $input = Input::all();
@@ -134,7 +136,7 @@ class MessagesController extends ApiController
         Message::create(
             [
                 'thread_id' => $thread->id,
-                'user_id'   => Auth::user()->id,
+                'user_id'   => $userId,
                 'body'      => $input['message'],
             ]
         );
@@ -143,7 +145,7 @@ class MessagesController extends ApiController
         Participant::create(
             [
                 'thread_id' => $thread->id,
-                'user_id'   => Auth::user()->id,
+                'user_id'   => $userId,
                 'last_read' => new Carbon
             ]
         );
@@ -168,6 +170,8 @@ class MessagesController extends ApiController
      */
     public function update($id)
     {
+        $userId = $this->user->id;
+
         try {
             $thread = Thread::findOrFail($id);
         } catch (ModelNotFoundException $e) {
@@ -182,7 +186,7 @@ class MessagesController extends ApiController
         Message::create(
             [
                 'thread_id' => $thread->id,
-                'user_id'   => Auth::id(),
+                'user_id'   => $userId,
                 'body'      => Input::get('message'),
             ]
         );
@@ -191,7 +195,7 @@ class MessagesController extends ApiController
         $participant = Participant::firstOrCreate(
             [
                 'thread_id' => $thread->id,
-                'user_id'   => Auth::user()->id
+                'user_id'   => $userId
             ]
         );
         $participant->last_read = new Carbon;
