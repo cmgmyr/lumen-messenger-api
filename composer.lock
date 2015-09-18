@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5454fb83990879803b23a0cfe068c035",
+    "hash": "d95709d7d3524d3512ce59097a6a2b76",
     "packages": [
         {
             "name": "cmgmyr/messenger",
@@ -1283,6 +1283,54 @@
             "time": "2015-09-04 12:45:07"
         },
         {
+            "name": "irazasyed/larasupport",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/irazasyed/larasupport.git",
+                "reference": "897a97adaff4b2c9767559b72975511e02a11541"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/irazasyed/larasupport/zipball/897a97adaff4b2c9767559b72975511e02a11541",
+                "reference": "897a97adaff4b2c9767559b72975511e02a11541",
+                "shasum": ""
+            },
+            "require": {
+                "league/flysystem": "~1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "helpers.php"
+                ],
+                "psr-4": {
+                    "Irazasyed\\Larasupport\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Syed Irfaq R.",
+                    "email": "syed+gh@lukonet.com"
+                }
+            ],
+            "description": "Adds Support to use Laravel Packages in Lumen.",
+            "keywords": [
+                "laravel",
+                "laravel lumen",
+                "laravel lumen support",
+                "laravel packages",
+                "lumen",
+                "lumen packages",
+                "lumen support"
+            ],
+            "time": "2015-07-10 20:00:12"
+        },
+        {
             "name": "laravel/lumen-framework",
             "version": "v5.1.4",
             "source": {
@@ -1366,6 +1414,87 @@
                 "lumen"
             ],
             "time": "2015-08-31 15:51:22"
+        },
+        {
+            "name": "league/flysystem",
+            "version": "1.0.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/flysystem.git",
+                "reference": "7323424a9d39c24e597ed3f2144419dfbb52e086"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/7323424a9d39c24e597ed3f2144419dfbb52e086",
+                "reference": "7323424a9d39c24e597ed3f2144419dfbb52e086",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "ext-fileinfo": "*",
+                "mockery/mockery": "~0.9",
+                "phpspec/phpspec": "^2.2",
+                "phpspec/prophecy-phpunit": "~1.0",
+                "phpunit/phpunit": "~4.1"
+            },
+            "suggest": {
+                "ext-fileinfo": "Required for MimeType",
+                "league/flysystem-aws-s3-v2": "Allows you to use S3 storage with AWS SDK v2",
+                "league/flysystem-aws-s3-v3": "Allows you to use S3 storage with AWS SDK v3",
+                "league/flysystem-azure": "Allows you to use Windows Azure Blob storage",
+                "league/flysystem-cached-adapter": "Flysystem adapter decorator for metadata caching",
+                "league/flysystem-copy": "Allows you to use Copy.com storage",
+                "league/flysystem-dropbox": "Allows you to use Dropbox storage",
+                "league/flysystem-eventable-filesystem": "Allows you to use EventableFilesystem",
+                "league/flysystem-rackspace": "Allows you to use Rackspace Cloud Files",
+                "league/flysystem-sftp": "Allows you to use SFTP server storage via phpseclib",
+                "league/flysystem-webdav": "Allows you to use WebDAV storage",
+                "league/flysystem-ziparchive": "Allows you to use ZipArchive adapter"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "League\\Flysystem\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Frank de Jonge",
+                    "email": "info@frenky.net"
+                }
+            ],
+            "description": "Filesystem abstraction: Many filesystems, one API.",
+            "keywords": [
+                "Cloud Files",
+                "WebDAV",
+                "abstraction",
+                "aws",
+                "cloud",
+                "copy.com",
+                "dropbox",
+                "file systems",
+                "files",
+                "filesystem",
+                "filesystems",
+                "ftp",
+                "rackspace",
+                "remote",
+                "s3",
+                "sftp",
+                "storage"
+            ],
+            "time": "2015-09-05 12:06:41"
         },
         {
             "name": "monolog/monolog",
