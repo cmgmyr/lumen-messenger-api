@@ -15,9 +15,9 @@ $app->get('/', function() use ($app) {
     return $app->welcome();
 });
 
-$app->group(['namespace' => 'App\Http\Controllers'], function () use ($app) {
-    $app->get('api/v1/messages', ['as' => 'messages', 'uses' => 'MessagesController@index']);
-    $app->post('api/v1/messages', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
-    $app->get('api/v1/messages/{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
-    $app->put('api/v1/messages/{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
+$app->group(['namespace' => 'App\Http\Controllers', 'prefix' => 'api/v1/messages'], function () use ($app) {
+    $app->get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
+    $app->post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
+    $app->get('/{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
+    $app->put('/{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
 });
