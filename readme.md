@@ -5,11 +5,11 @@ This is a simple (WIP) example of how you can use [Laravel Messenger](https://gi
 Stay tuned for more info...
 
 ## Notes
-1. Lumen doesn't have an `php artisan vendor:publish` command, so `config/messenger.php` and the `migrations` have been moved over by hand.
-2. `config_path` is not available in Lumen, so `src/helpers.php` has been made and added to `composer.json`
-3. The following was added to `bootstrap/app.php`:
+1. The `irazasyed/larasupport` package was installed in order to use the `config_path()` helper function, and the `vendor:publish` artisan command.
+2. The following was added to `bootstrap/app.php`:
 
 		$app->configure('messenger');
 		$app->register('Cmgmyr\Messenger\MessengerServiceProvider');
+		$app->register('Irazasyed\Larasupport\Providers\ArtisanServiceProvider');
 		
 	and uncomment: `$app->withFacades();`, `$app->withEloquent();` and `'Illuminate\Session\Middleware\StartSession',` (within Middleware)
