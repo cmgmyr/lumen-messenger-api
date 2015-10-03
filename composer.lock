@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "cmgmyr/messenger",
-            "version": "2.8",
+            "version": "2.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cmgmyr/laravel-messenger.git",
-                "reference": "7cb717427e176a6d1f529d6595d495db86fad0cd"
+                "reference": "e55d2e4141db0c067d1041fd663d0ad1977578ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cmgmyr/laravel-messenger/zipball/7cb717427e176a6d1f529d6595d495db86fad0cd",
-                "reference": "7cb717427e176a6d1f529d6595d495db86fad0cd",
+                "url": "https://api.github.com/repos/cmgmyr/laravel-messenger/zipball/e55d2e4141db0c067d1041fd663d0ad1977578ae",
+                "reference": "e55d2e4141db0c067d1041fd663d0ad1977578ae",
                 "shasum": ""
             },
             "require": {
@@ -57,7 +57,7 @@
                 "messaging",
                 "user messaging"
             ],
-            "time": "2015-09-27 11:40:52"
+            "time": "2015-10-06 14:10:11"
         },
         {
             "name": "danielstjules/stringy",
@@ -1332,16 +1332,16 @@
         },
         {
             "name": "laravel/lumen-framework",
-            "version": "v5.1.4",
+            "version": "v5.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/lumen-framework.git",
-                "reference": "b49e8275e47670b70043b50dcce67bd4079a03e9"
+                "reference": "69158e27539b4b6a1470262891866581b9061ff6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/lumen-framework/zipball/b49e8275e47670b70043b50dcce67bd4079a03e9",
-                "reference": "b49e8275e47670b70043b50dcce67bd4079a03e9",
+                "url": "https://api.github.com/repos/laravel/lumen-framework/zipball/69158e27539b4b6a1470262891866581b9061ff6",
+                "reference": "69158e27539b4b6a1470262891866581b9061ff6",
                 "shasum": ""
             },
             "require": {
@@ -1413,7 +1413,7 @@
                 "laravel",
                 "lumen"
             ],
-            "time": "2015-08-31 15:51:22"
+            "time": "2015-10-07 01:32:28"
         },
         {
             "name": "league/flysystem",
@@ -2645,16 +2645,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "2.2.3",
+            "version": "2.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "ef1ca6835468857944d5c3b48fa503d5554cff2f"
+                "reference": "eabf68b476ac7d0f73793aada060f1c1a9bf8979"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/ef1ca6835468857944d5c3b48fa503d5554cff2f",
-                "reference": "ef1ca6835468857944d5c3b48fa503d5554cff2f",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/eabf68b476ac7d0f73793aada060f1c1a9bf8979",
+                "reference": "eabf68b476ac7d0f73793aada060f1c1a9bf8979",
                 "shasum": ""
             },
             "require": {
@@ -2703,7 +2703,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-09-14 06:51:16"
+            "time": "2015-10-06 15:47:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2885,16 +2885,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.10",
+            "version": "4.8.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "463163747474815c5ccd4ae12b5b355ec12158e8"
+                "reference": "bdd199472410fd7e32751f9c814c7e06f2c21bd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/463163747474815c5ccd4ae12b5b355ec12158e8",
-                "reference": "463163747474815c5ccd4ae12b5b355ec12158e8",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/bdd199472410fd7e32751f9c814c7e06f2c21bd5",
+                "reference": "bdd199472410fd7e32751f9c814c7e06f2c21bd5",
                 "shasum": ""
             },
             "require": {
@@ -2953,7 +2953,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-10-01 09:14:30"
+            "time": "2015-10-07 10:39:46"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
