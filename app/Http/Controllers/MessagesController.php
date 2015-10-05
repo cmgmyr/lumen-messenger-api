@@ -8,8 +8,11 @@ use Cmgmyr\Messenger\Models\Thread;
 use Cmgmyr\Messenger\Models\Message;
 use Cmgmyr\Messenger\Models\Participant;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 
 class MessagesController extends ApiController
 {
@@ -110,13 +113,22 @@ class MessagesController extends ApiController
      *
      * Example URL: POST /api/v1/messages?api_key=30ce6864e2589b01bc002b03aa6a7923
      *
+     * @param Request $request
      * @return mixed
      */
-    public function store()
+    public function store(Request $request)
     {
-        // @todo: run validation
+        $validator = Validator::make($request->all(), [
+            'subject' => 'required',
+            'message' => 'required',
+        ]);
 
-        $input = Input::all();
+        if ($validator->fails()) {
+            return $this->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY)
+                ->respondWithError(['validation-errors' => $validator->errors()->all()]);
+        }
+
+        $input = $request->all();
 
         $thread = Thread::create(
             [
