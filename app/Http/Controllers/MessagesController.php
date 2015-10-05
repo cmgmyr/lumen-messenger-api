@@ -58,11 +58,9 @@ class MessagesController extends ApiController
             $thread->is_unread = $thread->isUnread($userId);
         });
 
-        $data = $threadTransformer->transformCollection($threads->toArray()['data']);
-
         $response = [
             'pagination' => $this->buildPagination($threads),
-            'data'       => $data
+            'data'       => $threadTransformer->transformCollection($threads->toArray()['data']),
         ];
 
         return $this->respondWithSuccess($response);
@@ -79,15 +77,13 @@ class MessagesController extends ApiController
      */
     public function show(MessageTransformer $messageTransformer, $id)
     {
-        $userId = $this->user->id;
-
         try {
             $thread = Thread::findOrFail($id);
         } catch (ModelNotFoundException $e) {
             return $this->respondNotFound('Sorry, the message thread was not found.');
         }
 
-        $thread->markAsRead($userId);
+        $thread->markAsRead($this->user->id);
         $messageData = $thread->toArray();
 
         // Get messages
@@ -102,10 +98,8 @@ class MessagesController extends ApiController
         $nonParticipants = User::whereNotIn('id', $thread->participantsUserIds())->get();
         $messageData['non_participants'] = $nonParticipants->toArray();
 
-        $data = $messageTransformer->transform($messageData);
-
         $response = [
-            'data' => $data
+            'data' => $messageTransformer->transform($messageData),
         ];
 
         return $this->respondWithSuccess($response);
@@ -120,8 +114,6 @@ class MessagesController extends ApiController
      */
     public function store()
     {
-        $userId = $this->user->id;
-
         // @todo: run validation
 
         $input = Input::all();
@@ -136,7 +128,7 @@ class MessagesController extends ApiController
         Message::create(
             [
                 'thread_id' => $thread->id,
-                'user_id'   => $userId,
+                'user_id'   => $this->user->id,
                 'body'      => $input['message'],
             ]
         );
@@ -145,7 +137,7 @@ class MessagesController extends ApiController
         Participant::create(
             [
                 'thread_id' => $thread->id,
-                'user_id'   => $userId,
+                'user_id'   => $this->user->id,
                 'last_read' => new Carbon
             ]
         );
@@ -170,8 +162,6 @@ class MessagesController extends ApiController
      */
     public function update($id)
     {
-        $userId = $this->user->id;
-
         try {
             $thread = Thread::findOrFail($id);
         } catch (ModelNotFoundException $e) {
@@ -186,7 +176,7 @@ class MessagesController extends ApiController
         Message::create(
             [
                 'thread_id' => $thread->id,
-                'user_id'   => $userId,
+                'user_id'   => $this->user->id,
                 'body'      => Input::get('message'),
             ]
         );
@@ -195,7 +185,7 @@ class MessagesController extends ApiController
         $participant = Participant::firstOrCreate(
             [
                 'thread_id' => $thread->id,
-                'user_id'   => $userId
+                'user_id'   => $this->user->id
             ]
         );
         $participant->last_read = new Carbon;
