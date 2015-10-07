@@ -169,10 +169,11 @@ class MessagesController extends ApiController
      *
      * Example URL: PUT /api/v1/messages/1?api_key=30ce6864e2589b01bc002b03aa6a7923
      *
+     * @param Request $request
      * @param $id
      * @return mixed
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
         try {
             $thread = Thread::findOrFail($id);
@@ -180,7 +181,14 @@ class MessagesController extends ApiController
             return $this->respondNotFound('Sorry, the message thread was not found.');
         }
 
-        // @todo: run validation
+        $validator = Validator::make($request->all(), [
+            'message' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY)
+                ->respondWithError(['validation-errors' => $validator->errors()->all()]);
+        }
 
         $thread->activateAllParticipants();
 
