@@ -9,7 +9,6 @@ use Cmgmyr\Messenger\Models\Message;
 use Cmgmyr\Messenger\Models\Participant;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
@@ -124,8 +123,7 @@ class MessagesController extends ApiController
         ]);
 
         if ($validator->fails()) {
-            return $this->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY)
-                ->respondWithError(['validation-errors' => $validator->errors()->all()]);
+            return $this->respondWithValidationError(['validation-errors' => $validator->errors()->all()]);
         }
 
         $input = $request->all();
@@ -186,8 +184,7 @@ class MessagesController extends ApiController
         ]);
 
         if ($validator->fails()) {
-            return $this->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY)
-                ->respondWithError(['validation-errors' => $validator->errors()->all()]);
+            return $this->respondWithValidationError(['validation-errors' => $validator->errors()->all()]);
         }
 
         $thread->activateAllParticipants();

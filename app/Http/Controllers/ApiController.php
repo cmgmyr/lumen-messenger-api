@@ -109,4 +109,13 @@ class ApiController extends Controller
     {
         return $this->respondWithSuccess($data);
     }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function respondWithValidationError($data)
+    {
+        return $this->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY)->respondWithError($data);
+    }
 }
