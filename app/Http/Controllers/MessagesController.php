@@ -1,12 +1,14 @@
-<?php namespace App\Http\Controllers;
+<?php
+
+namespace app\Http\Controllers;
 
 use App\Services\Transformer\MessageTransformer;
 use App\Services\Transformer\ThreadTransformer;
 use App\User;
 use Carbon\Carbon;
-use Cmgmyr\Messenger\Models\Thread;
 use Cmgmyr\Messenger\Models\Message;
 use Cmgmyr\Messenger\Models\Participant;
+use Cmgmyr\Messenger\Models\Thread;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +17,6 @@ use Illuminate\Support\Facades\Validator;
 
 class MessagesController extends ApiController
 {
-
     /**
      * @var User
      */
@@ -33,7 +34,7 @@ class MessagesController extends ApiController
     }
 
     /**
-     * Show all of the message threads associated with the user
+     * Show all of the message threads associated with the user.
      *
      * Example URL: GET /api/v1/messages?api_key=30ce6864e2589b01bc002b03aa6a7923&per_page=10&page=2
      *
@@ -56,7 +57,7 @@ class MessagesController extends ApiController
         }
 
         // see if the threads have been read by the user
-        $threads->each(function($thread) use ($userId) {
+        $threads->each(function ($thread) use ($userId) {
             $thread->is_unread = $thread->isUnread($userId);
         });
 
@@ -69,7 +70,7 @@ class MessagesController extends ApiController
     }
 
     /**
-     * Shows a message thread
+     * Shows a message thread.
      *
      * Example URL: GET /api/v1/messages/1?api_key=30ce6864e2589b01bc002b03aa6a7923
      *
@@ -108,7 +109,7 @@ class MessagesController extends ApiController
     }
 
     /**
-     * Stores a new message thread
+     * Stores a new message thread.
      *
      * Example URL: POST /api/v1/messages?api_key=30ce6864e2589b01bc002b03aa6a7923
      *
@@ -148,7 +149,7 @@ class MessagesController extends ApiController
             [
                 'thread_id' => $thread->id,
                 'user_id'   => $this->user->id,
-                'last_read' => new Carbon
+                'last_read' => new Carbon,
             ]
         );
 
@@ -158,12 +159,12 @@ class MessagesController extends ApiController
         }
 
         return $this->respondWithCreated([
-            'id' => $thread->id
+            'id' => $thread->id,
         ]);
     }
 
     /**
-     * Adds a new message to a current thread
+     * Adds a new message to a current thread.
      *
      * Example URL: PUT /api/v1/messages/1?api_key=30ce6864e2589b01bc002b03aa6a7923
      *
@@ -202,7 +203,7 @@ class MessagesController extends ApiController
         $participant = Participant::firstOrCreate(
             [
                 'thread_id' => $thread->id,
-                'user_id'   => $this->user->id
+                'user_id'   => $this->user->id,
             ]
         );
         $participant->last_read = new Carbon;
@@ -214,7 +215,7 @@ class MessagesController extends ApiController
         }
 
         return $this->respondWithSaved([
-            'id' => $thread->id
+            'id' => $thread->id,
         ]);
     }
 }

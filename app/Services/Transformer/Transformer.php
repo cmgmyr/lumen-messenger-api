@@ -1,10 +1,11 @@
-<?php namespace App\Services\Transformer;
+<?php
+
+namespace app\Services\Transformer;
 
 abstract class Transformer implements TransformerInterface
 {
-
     /**
-     * Transforms a collection
+     * Transforms a collection.
      *
      * @param $collection
      * @return array

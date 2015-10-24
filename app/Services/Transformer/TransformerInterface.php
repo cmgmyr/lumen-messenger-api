@@ -1,10 +1,11 @@
-<?php namespace App\Services\Transformer;
+<?php
+
+namespace app\Services\Transformer;
 
 interface TransformerInterface
 {
-
     /**
-     * Transforms a given array
+     * Transforms a given array.
      *
      * @param array $item
      * @return array

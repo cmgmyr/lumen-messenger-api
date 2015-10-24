@@ -1,10 +1,11 @@
-<?php namespace App\Services\Transformer;
+<?php
+
+namespace app\Services\Transformer;
 
 class MessageTransformer extends Transformer
 {
-
     /**
-     * Transforms a given array
+     * Transforms a given array.
      *
      * @param array $item
      * @return array
@@ -18,12 +19,12 @@ class MessageTransformer extends Transformer
             'updated_at' => $item['updated_at'],
             'messages' => $this->transformMessageCollection($item['messages']),
             'participants' => $this->transformParticipantsCollection($item['participants']),
-            'non_participants' => $this->transformParticipantsCollection($item['non_participants'])
+            'non_participants' => $this->transformParticipantsCollection($item['non_participants']),
         ];
     }
 
     /**
-     * Transforms a message collection
+     * Transforms a message collection.
      *
      * @param $collection
      * @return array
@@ -34,7 +35,7 @@ class MessageTransformer extends Transformer
     }
 
     /**
-     * Transforms a given message
+     * Transforms a given message.
      *
      * @param array $item
      * @return array
@@ -47,12 +48,12 @@ class MessageTransformer extends Transformer
             'user_name' => $item['user']['first_name'] . ' ' . $item['user']['last_name'],
             'body' => $item['body'],
             'created_at' => $item['created_at'],
-            'updated_at' => $item['updated_at']
+            'updated_at' => $item['updated_at'],
         ];
     }
 
     /**
-     * Transforms a participants collection
+     * Transforms a participants collection.
      *
      * @param $collection
      * @return array
@@ -63,7 +64,7 @@ class MessageTransformer extends Transformer
     }
 
     /**
-     * Transforms a given participants
+     * Transforms a given participants.
      *
      * @param array $item
      * @return array

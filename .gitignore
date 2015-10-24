@@ -1,4 +1,5 @@
 /lumen.log
 /vendor
 .env
+.php_cs.cache
 /files

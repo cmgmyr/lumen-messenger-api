@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php
+
+namespace app\Http\Controllers;
 
 use Illuminate\Http\Response;
 
@@ -29,7 +31,7 @@ class ApiController extends Controller
     }
 
     /**
-     * Builds a pagination array
+     * Builds a pagination array.
      *
      * @param $data
      * @return mixed
