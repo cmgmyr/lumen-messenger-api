@@ -1,3 +1,6 @@
+
+[![Get help on Codementor](https://cdn.codementor.io/badges/get_help_github.svg)](https://www.codementor.io/cmgmyr)
+
 # Lumen Messenger API Example
 
 This is a simple (WIP) example of how you can use [Laravel Messenger](https://github.com/cmgmyr/laravel-messenger) and [Lumen](http://lumen.laravel.com/) to build an API.
